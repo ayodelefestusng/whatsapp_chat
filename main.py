@@ -196,6 +196,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 import os
 
+
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
 
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
