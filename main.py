@@ -1,5 +1,5 @@
 # from fastapi import FastAPI, Request
-from fastapi import FastAPI, Request
+
 
 # import httpx
 # import os
@@ -182,23 +182,32 @@ from fastapi import FastAPI, Request
 #             print(f"DEBUG: Evolution Response: {resp.status_code} - {resp.text}")
 #     except Exception as e:
 #         print(f"❌ SEND_MSG ERROR: {e}")
+
+from fastapi import FastAPI, Request
 from fastapi import FastAPI, Request, Depends
-from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.orm import sessionmaker, Session, declarative_base
+
+from sqlalchemy import create_engine, Column, Integer, String, Text 
+from sqlalchemy.orm import sessionmaker, declarative_base, Session import os
+from dotenv import load_dotenv
 import redis
 import os
-from dotenv import load_dotenv  
+
+from sqlalchemy import create_engine, Column, Integer, String, Text
+from sqlalchemy.orm import sessionmaker, declarative_base, Session
+import os
+
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
 
-# Normalize legacy scheme if needed
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
 
-# Always create the engine here
 engine = create_engine(DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+ 
+
 
 class UserState(Base):
     __tablename__ = "user_states"
