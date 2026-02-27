@@ -212,19 +212,19 @@ import os
 # DATABASE_URL = os.getenv("DATABASE_URL", "postgres://postgres:0db1049bb69c8aac67b5@whatsapp-1_evolution-api-db:5432/whatsapp-1?sslmode=disable")
 
 
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-import os 
-DATABASE_URL = os.getenv("DATABASE_URL") # Fix legacy postgres:// scheme 
-if DATABASE_URL.startswith("postgres://"): 
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# Normalize legacy scheme if needed
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1)
-    # DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-    engine = create_engine(DATABASE_URL)
-engine = create_engine(DATABASE_URL)    
-# DATABASE_URL = os.getenv("DATABASE_URL")
-# # Fix legacy postgres:// scheme if DATABASE_URL.startswith("postgres://"):
-# if DATABASE_URL.startswith("postgres://"):
-#     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-# engine = create_engine(DATABASE_URL)
+
+# Always create the engine here
+engine = create_engine(DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
