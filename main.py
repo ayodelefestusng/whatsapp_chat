@@ -211,7 +211,7 @@ import os
 # --- Database Setup ---
 # DATABASE_URL = os.getenv("DATABASE_URL", "postgres://postgres:0db1049bb69c8aac67b5@whatsapp-1_evolution-api-db:5432/whatsapp-1?sslmode=disable")
 
-# engine = create_engine(DATABASE_URL)
+
 
 import os 
 DATABASE_URL = os.getenv("DATABASE_URL") # Fix legacy postgres:// scheme 
