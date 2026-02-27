@@ -1,6 +1,5 @@
 # from fastapi import FastAPI, Request
 from fastapi import FastAPI, Request
-from fastapi import FastAPI
 
 # import httpx
 # import os
@@ -183,40 +182,13 @@ from fastapi import FastAPI
 #             print(f"DEBUG: Evolution Response: {resp.status_code} - {resp.text}")
 #     except Exception as e:
 #         print(f"❌ SEND_MSG ERROR: {e}")
-app=FastAPI()
-@app.get("/")
-async def root():
-    return {"status": "online", "database": "connected"}
-
-@app.post("/webhook")
-async def webhook(request: Request):
-    data = await request.json()
-    return {"status": "success"}
-
-
-#Utility Endpointsd   
-
-@app.get("/utility/")
-def read_root():
-    return {"message": "Hello from ATB AI!"}
-
-
 from fastapi import FastAPI, Request, Depends
 from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker, Session, declarative_base
 import redis
 import os
-# jj
-# --- Database Setup ---
-# DATABASE_URL = os.getenv("DATABASE_URL", "postgres://postgres:0db1049bb69c8aac67b5@whatsapp-1_evolution-api-db:5432/whatsapp-1?sslmode=disable")
-
-
-import os
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
-
-DATABASE_URL = os.getenv("DATABASE_URL")
+from dotenv import load_dotenv  
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")
 
 # Normalize legacy scheme if needed
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
@@ -244,6 +216,14 @@ redis_client = redis.Redis.from_url(REDIS_URL)
 
 # --- FastAPI App ---
 app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"status": "online", "database": "connected"}
+
+@app.get("/utility/")
+def read_root():
+    return {"message": "Hello from ATB AI!"}
 
 # Dependency for DB session
 def get_db():
