@@ -187,7 +187,7 @@ from fastapi import FastAPI, Request
 from fastapi import FastAPI, Request, Depends
 
 from sqlalchemy import create_engine, Column, Integer, String, Text 
-from sqlalchemy.orm import sessionmaker, declarative_base, Session import os
+from sqlalchemy.orm import sessionmaker, declarative_base, Session 
 from dotenv import load_dotenv
 import redis
 import os
