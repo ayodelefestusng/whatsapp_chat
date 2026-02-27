@@ -185,6 +185,7 @@
 
 from fastapi import FastAPI, Request
 from fastapi import FastAPI, Request, Depends
+HTTPException
 
 from sqlalchemy import create_engine, Column, Integer, String, Text 
 
