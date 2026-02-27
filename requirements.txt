@@ -1,12 +1,12 @@
 fastapi
 uvicorn
-requests
-sqlalchemy
-python-dotenv
-cryptography
-aiomysql
-asyncmy
-httpx
-mysql-connector-python
-aiosqlite
-pymysql
+# requests
+# sqlalchemy
+# python-dotenv
+# cryptography
+# aiomysql
+# asyncmy
+# httpx
+# mysql-connector-python
+# aiosqlite
+# pymysql
